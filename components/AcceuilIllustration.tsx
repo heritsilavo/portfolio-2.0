@@ -1,87 +1,156 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+import { useInView } from 'react-intersection-observer'
 
 type AcceuilIllustrationProps = {
     className: string;
 }
 
 const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) => {
-    useEffect(() => {
-        const cactusTimeline = gsap.timeline({
+
+    // Utiliser useRef pour stocker les références aux timelines
+    const masterTimelineRef = useRef<GSAPTimeline | null>(null);
+    const [started, setStarted] = useState(false);
+
+    const { ref: svgRef, inView } = useInView({
+        threshold: 0.5, // 50% visibility threshold
+    });
+
+    // Séparer les configurations d'animation pour plus de clarté
+    const animationConfig = {
+        cactus: {
+            duration: 1,
+            rotationOrigin: "bottom center",
+            initialScale: 0.7
+        },
+        screens: {
+            ease: "elastic.out(1, 0.75)",
+            duration: 0.8,
+            floatingDuration: { min: 2, max: 4 }
+        },
+        eyes: {
+            blinkDuration: 0.1,
+            delayRange: { min: 1, max: 3 }
+        }
+    };
+
+    // Séparer les animations en fonctions réutilisables
+    const createCactusAnimation = () => {
+        const timeline = gsap.timeline({
+            defaults: { duration: animationConfig.cactus.duration }
+        });
+
+        timeline
+            .fromTo("#cactus_1",
+                { y: '100%', scale: animationConfig.cactus.initialScale },
+                { y: 0, scale: 1 })
+            .fromTo("#cactus_1_epines",
+                { opacity: 0 },
+                { opacity: 1, duration: 0.8 },
+                "<50%")
+            .fromTo("#cactus_2",
+                { scale: 0, x: "100%", y: "100%" },
+                { scale: 1, x: 0, y: 0, duration: 0.5 },
+                "<50%")
+            .set(["#cactus_1", "#cactus_2"], {
+                transformOrigin: animationConfig.cactus.rotationOrigin
+            })
+            .to(["#cactus_1", "#cactus_2"], {
+                rotateZ: gsap.utils.wrap([-2, -8]),
+                duration: gsap.utils.wrap([1, 1.1]),
+                repeat: -1,
+                yoyo: true
+            });
+
+        return timeline;
+    };
+
+    const createScreensAnimation = () => {
+        const allScreens = gsap.utils.toArray('._screen') as Element[];
+        const timeline = gsap.timeline({
             defaults: {
-                duration: 1
+                ease: animationConfig.screens.ease,
+                duration: animationConfig.screens.duration
             }
         });
-        
-        // Cactus animations
-        cactusTimeline.fromTo("#cactus_1", { duration: 1, y: '100%', scale: 0.7 }, { y: 0, scale: 1 });
-        cactusTimeline.fromTo("#cactus_1_epines", { duration: 0.8, opacity: 0 }, { opacity: 1 }, "<50%");
-        cactusTimeline.fromTo("#cactus_2", { duration: 0.5, scale: 0, x: "100%", y: "100%" }, { scale: 1, x: 0, y: 0 }, "<50%");
-        cactusTimeline.set("#cactus_1", { transformOrigin: "bottom center", rotateZ: 2 })
-        cactusTimeline.set("#cactus_2", { transformOrigin: "bottom right" })
-        cactusTimeline.to("#cactus_1", { duration: 1, repeat: -1, yoyo: true, rotateZ: -2 }, "<50%")
-        cactusTimeline.to("#cactus_2", { duration: 1.1, repeat: -1, yoyo: true, rotateZ: -8 })
-    
-        // Wheel animation
-        const roueTimeline = gsap.timeline()
-        roueTimeline.set("._roue", { scale: 0, transformOrigin: "center center", display: "flex" });
-        roueTimeline.to("._roue", { duration: 1, scale: 0.8 })
-        roueTimeline.to("._roue", { repeat: -1, duration: 3, rotateZ: 360 }, "<50%");
-    
-        // Modified screen animations with floating effect
-        const allScreens = document.querySelectorAll('._screen');
-        const screenTimeline = gsap.timeline({
-            defaults: {
-                ease: "elastic.out(1, 0.75)"
-            }
-        })
-    
-        // Initial setup
-        screenTimeline.set(allScreens, { 
-            transformOrigin: "center center", 
-            scale: 0, 
-            opacity: 0, 
+
+        // Configuration initiale
+        timeline.set(allScreens, {
+            transformOrigin: "center center",
+            scale: 0,
+            opacity: 0,
             display: "flex"
-        })
-    
-        // Main screen appearance
-        screenTimeline.to(["#screen_left_2", "#screen_left_3", "#screen_left_4"], {
-            duration: 0.8,
-            scale: 1,
-            opacity: 1,
-            stagger: {
-                amount: 0.6,
-                from: 'center'
-            }
-        })
-        .to("#screenr_ight_1", {
-            duration: 0.8,
-            scale: 1,
-            opacity: 1
-        }, "-=0.5");
-    
-        // Add floating animation to each screen
+        });
+
+        // Animation principale
+        timeline
+            .to(["#screen_left_2", "#screen_left_3", "#screen_left_4"], {
+                scale: 1,
+                opacity: 1,
+                stagger: { amount: 0.6, from: 'center' }
+            })
+            .to("#screenr_ight_1", {
+                scale: 1,
+                opacity: 1
+            }, "-=0.5");
+
+        // Animation flottante
         allScreens.forEach((screen, index) => {
-            // Create random subtle movements for each screen
+            const duration = gsap.utils.random(
+                animationConfig.screens.floatingDuration.min,
+                animationConfig.screens.floatingDuration.max
+            );
+
             gsap.to(screen, {
                 y: "random(-10, 10)",
                 x: "random(-5, 5)",
-                duration: "random(2, 4)",
+                duration,
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut",
                 delay: index * 0.2,
             });
         });
-    
-        // Code animation timeline
+
+        return timeline;
+    };
+
+    const createEyesAnimation = () => {
+        const eyes = ["#oeuil_gauche", "#oeuil_droite"];
+
+        const blink = () => {
+            const timeline = gsap.timeline({
+                defaults: {
+                    transformOrigin: "center center",
+                    ease: "power1.inOut",
+                    duration: animationConfig.eyes.blinkDuration
+                }
+            });
+
+            timeline
+                .to(eyes, { scaleY: 0.2 })
+                .to(eyes, { scaleY: 1 });
+
+            gsap.delayedCall(
+                gsap.utils.random(
+                    animationConfig.eyes.delayRange.min,
+                    animationConfig.eyes.delayRange.max
+                ),
+                blink
+            );
+        };
+
+        return blink;
+    };
+
+    const createCodeAnimation = () => {
         const codeTimeline = gsap.timeline({
             defaults: {
                 ease: "power1.inOut"
             }
         });
-    
+
         codeTimeline.set([
             "#code_blanc path",
             "#codes path",
@@ -95,7 +164,7 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
             },
             display: "flex"
         });
-    
+
         // Code animations with floating effect
         codeTimeline
             .to("#code_blanc path", {
@@ -126,20 +195,44 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
                     repeat: -1
                 }
             }, "-=0.2");
-    
-        // Chain the timelines
-        screenTimeline.add(codeTimeline);
-    
-        return () => {
-            cactusTimeline.kill()
-            roueTimeline.kill()
-            screenTimeline.kill()
-            codeTimeline.kill()
-        }
-    }, []);
 
-    return <svg className={className + " overflow-visible "} viewBox="0 0 746 556" fill="none">
-        <g id="illustration">
+        return codeTimeline;
+    }
+
+    useEffect(() => {
+        if (inView && !started) {
+
+            // Créer la timeline principale
+            masterTimelineRef.current = gsap.timeline();
+
+            // Animation initiale 
+            masterTimelineRef.current
+                .set("#illustration", { display: "flex" })
+                .fromTo("#illustration",
+                    { opacity: 0 },
+                    { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+                )
+                .add(createCactusAnimation())
+                .add(createScreensAnimation(), "<")
+                .add(createEyesAnimation(), "<")
+                .add(createCodeAnimation(), "<");
+            setStarted(true)
+        } else if (inView && started) {
+            masterTimelineRef.current?.play()
+        }
+        else {
+            // Arrêter l'animation si le SVG n'est plus visible
+            masterTimelineRef.current?.pause();
+        }
+
+        // Cleanup
+        return () => {
+            masterTimelineRef.current?.kill();
+        };
+    }, [inView]);
+
+    return <svg ref={svgRef} id='svg-illustration' className={className + " overflow-visible "} viewBox="0 0 746 556" fill="none">
+        <g className='hidden' id="illustration">
             <g id="cactus_2">
                 <path id="Vector 29" d="M614.722 416.122C615.505 413.296 619.288 409.225 621.082 407.542C619.517 406.735 619.125 406.028 619.125 405.776V402.495C618.391 399.215 617.413 390.635 608.852 391.14C602.003 391.544 599.801 395.514 599.557 397.448L599.801 408.299C600.975 414.961 610.238 416.29 614.722 416.122Z" fill="#4BBD75" stroke="#4BBD75" strokeLinecap="round" />
                 <path id="Vector 30" d="M602.736 410.066L605.427 412.589M609.341 404.262L610.564 404.514L611.053 406.533M616.679 398.458C616.679 398.878 616.777 399.82 617.168 400.224M600.29 397.953C600.943 398.29 602.296 399.215 602.492 400.224M607.139 392.401C608.281 392.233 610.564 391.998 610.564 392.401" stroke="#4A875E" strokeWidth="3" strokeLinecap="round" />

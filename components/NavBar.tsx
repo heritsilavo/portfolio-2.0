@@ -10,10 +10,10 @@ const NavBar = () => {
 
   return (
     <nav className="w-full bg-background shadow-lg">
-      <div className="mx-14 px-4 sm:px-6 lg:px-8">
+      <div className="mx-4 sm:mx-6 lg:mx-5 xl:mx-8 2xl:mx-20 px-0 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className='text-[24px] md:text-[32px] italic'>
+          <div className='text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] 2xl:text-[36px] italic'>
             <a href="/" className="text-accent font-bold">
               Heritsilavo
             </a>
@@ -51,7 +51,7 @@ const NavBar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex text-base lg:text-xl space-x-8 lg:space-x-24 text-gray-600 font-medium">
+          <div className="hidden md:flex text-[16px] sm:text-[18px] md:text-sm xl:text-md 2xl:text-xl space-x-8 lg:space-x-10 2xl:space-x-16 text-gray-600 font-medium">
             <a href="/" className="hover:text-accent transition-colors duration-300">
               Accueil
             </a>
@@ -72,16 +72,16 @@ const NavBar = () => {
       {isMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-background shadow-lg z-20">
           <div className="flex flex-col items-center space-y-4 py-4">
-            <a href="/" className="text-gray-600 hover:text-accent transition-colors duration-300">
+            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Accueil
             </a>
-            <a href="/" className="text-gray-600 hover:text-accent transition-colors duration-300">
+            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Services
             </a>
-            <a href="/" className="text-gray-600 hover:text-accent transition-colors duration-300">
+            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Compétences
             </a>
-            <a href="/" className="text-gray-600 hover:text-accent transition-colors duration-300">
+            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Projets
             </a>
           </div>

@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,9 +15,9 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className='text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] 2xl:text-[36px] italic'>
-            <a href="/" className="text-accent font-bold">
+            <Link href="/" className="text-accent font-bold">
               Heritsilavo
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -52,18 +53,18 @@ const NavBar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex text-[16px] sm:text-[18px] md:text-sm xl:text-md 2xl:text-xl space-x-8 lg:space-x-10 2xl:space-x-16 text-gray-600 font-medium">
-            <a href="/" className="hover:text-accent transition-colors duration-300">
+            <Link href="/" className="hover:text-accent transition-colors duration-300">
               Accueil
-            </a>
-            <a href="/" className="hover:text-accent transition-colors duration-300">
+            </Link>
+            <Link href="/" className="hover:text-accent transition-colors duration-300">
               Services
-            </a>
-            <a href="/" className="hover:text-accent transition-colors duration-300">
+            </Link>
+            <Link href="/" className="hover:text-accent transition-colors duration-300">
               Compétences
-            </a>
-            <a href="/" className="hover:text-accent transition-colors duration-300">
+            </Link>
+            <Link href="/" className="hover:text-accent transition-colors duration-300">
               Projets
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -72,18 +73,18 @@ const NavBar = () => {
       {isMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-background shadow-lg z-20">
           <div className="flex flex-col items-center space-y-4 py-4">
-            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
+            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Accueil
-            </a>
-            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
+            </Link>
+            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Services
-            </a>
-            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
+            </Link>
+            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Compétences
-            </a>
-            <a href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
+            </Link>
+            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
               Projets
-            </a>
+            </Link>
           </div>
         </div>
       )}

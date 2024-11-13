@@ -18,10 +18,12 @@ export default function AccTextes() {
             .set("._metier_txt", { y: () => randomValue(20), opacity: 0 })
             .set('#_slogan', { opacity: 0 })
             .set('#_desc', { opacity: 0 })
+            .set("._btn", { opacity: 0, scale:0.5, transformOrigin:"center center" })
             .to("._hello_txt", { duration: 1, opacity: 1, y: 0, stagger: 0.2 })
             .to("._metier_txt", { duration: 1, opacity: 1, y: 0, stagger: 0.2 }, "<")
             .to("#_slogan", { opacity: 1 }, "<30%")
             .to("#_desc", { opacity: 1 }, "<30%")
+            .to("._btn", { opacity: 1, scale:1, stagger:0.3, ease:"elastic.out(1,0.75)" })
 
 
         return () => {
@@ -49,7 +51,7 @@ export default function AccTextes() {
 
         <div className=" _animated opacity-0 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 md:gap-6 mt-8 lg:mt-6 w-full sm:max-w-[80%] lg:max-w-[100%] mx-auto">
             <button
-                className="flex items-center justify-center gap-2 
+                className="_btn flex items-center justify-center gap-2 
               lg:px-3 py-3 lg:py-2 w-full sm:w-1/2 md:w-[40%] lg:w-auto
               bg-accent text-background font-bold rounded-lg 
               border-2 border-accent transition-all duration-300
@@ -60,7 +62,7 @@ export default function AccTextes() {
             </button>
 
             <button
-                className="flex items-center justify-center gap-2 
+                className="_btn flex items-center justify-center gap-2 
               lg:px-3 py-3 lg:py-2 2xl:px-4 2xl:py-3 w-full sm:w-1/2 md:w-[40%] lg:w-auto
               bg-transparent text-accent font-bold rounded-lg 
               border-2 border-accent transition-all duration-300
@@ -76,7 +78,7 @@ export default function AccTextes() {
 
 const wrapWordsInSpan = function ({ text, spanClass }: { text: string, spanClass: string }) {
     const spanList = text.split(" ").map(word => (<span className={"inline-block " + spanClass} key={(Math.random() * Math.random()) * (Math.random() * Math.random())} >{word}</span>))
-    const result: any[] = [];
+    const result: (JSX.Element | string)[] = [];
     spanList.forEach(spanElem => {
         result.push(spanElem)
         result.push(" ");

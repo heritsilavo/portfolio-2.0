@@ -7,7 +7,7 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   useEffect(() => {
     gsap.to("._nav", { opacity: 1 })
-  }, [])
+  }, [isMenuOpen])
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

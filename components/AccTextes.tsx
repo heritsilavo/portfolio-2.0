@@ -76,7 +76,7 @@ export default function HeroSection() {
                 opacity: 1,
                 scale: 1,
                 stagger: 0.2,
-                ease: "elastic.out(1, 0.7)",
+                ease: "elastic.out(1,0.3)",
                 duration: 1.2
             }, "<0.4");
 
@@ -87,35 +87,35 @@ export default function HeroSection() {
 
     return (
         <div className="hero-container">
-            <h1 className="hero-animated text-4xl xl:text-5xl 2xl:text-7xl font-semibold text-center lg:text-left">
+            <h1 className="hero-animated opacity-0 text-4xl xl:text-5xl 2xl:text-7xl font-semibold text-center lg:text-left">
                 {splitText({ 
                     text: "Bonjour, Je suis Heritsilavo",
                     className: "hero-title"
                 })}
             </h1>
 
-            <h2 className="hero-animated text-2xl sm:text-3xl xl:text-4xl 2xl:text-6xl text-accent font-bold mt-4 md:mt-6 lg:mt-3 xl:mt-4 2xl:mt-7 text-center lg:text-left">
+            <h2 className="hero-animated opacity-0 text-2xl sm:text-3xl xl:text-4xl 2xl:text-6xl text-accent font-bold mt-4 md:mt-6 lg:mt-3 xl:mt-4 2xl:mt-7 text-center lg:text-left">
                 {splitText({
                     text: "Développeur frontend",
                     className: "hero-subtitle"
                 })}
             </h2>
 
-            <p className="hero-slogan hero-animated text-lg md:text-lg lg:text-xl 2xl:text-3xl mt-4 md:mt-6 lg:mt-3 xl:mt-4 2xl:mt-6 text-center lg:text-left">
+            <p className="hero-slogan hero-animated opacity-0 text-lg md:text-lg lg:text-xl 2xl:text-3xl mt-4 md:mt-6 lg:mt-3 xl:mt-4 2xl:mt-6 text-center lg:text-left">
                 Construisons votre avenir numérique ligne par ligne
             </p>
 
-            <p className="hero-description hero-animated text-sm md:text-base lg:text-sm 2xl:text-xl mt-4 md:mt-6 lg:mt-4 xl:mt-6 2xl:mt-7 max-w-[100%] sm:max-w-[80%] lg:max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%] text-center lg:text-left mx-auto lg:mx-0">
+            <p className="hero-description hero-animated opacity-0 text-sm md:text-base lg:text-sm 2xl:text-xl mt-4 md:mt-6 lg:mt-4 xl:mt-6 2xl:mt-7 max-w-[100%] sm:max-w-[80%] lg:max-w-[90%] xl:max-w-[80%] 2xl:max-w-[70%] text-center lg:text-left mx-auto lg:mx-0">
                 Passionné par le développement frontend, je transforme des concepts créatifs en expériences web fluides et intuitives. Spécialisé en React(Next.js), TypeScript et animations, je m'engage à créer des interfaces modernes pour donner vie à vos projets web les plus ambitieux.
             </p>
 
             <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 md:gap-6 mt-8 lg:mt-6 w-full sm:max-w-[80%] lg:max-w-[100%] mx-auto">
-                <button className="hero-button flex items-center justify-center gap-2 lg:px-3 py-3 lg:py-2 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-accent text-background font-bold rounded-lg border-2 border-accent transition-all duration-300 text-sm md:text-base lg:text-sm 2xl:text-xl hover:bg-transparent hover:text-accent">
+                <button className="hero-button opacity-0 flex items-center justify-center gap-2 lg:px-3 py-3 lg:py-2 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-accent text-background font-bold rounded-lg border-2 border-accent transition-all duration-300 text-sm md:text-base lg:text-sm 2xl:text-xl hover:bg-transparent hover:text-accent">
                     <Download className="w-4 h-4 md:w-5 md:h-5 2xl:w-7 2xl:h-7" />
                     <span>Télécharger CV</span>
                 </button>
 
-                <button className="hero-button flex items-center justify-center gap-2 lg:px-3 py-3 lg:py-2 2xl:px-4 2xl:py-3 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-transparent text-accent font-bold rounded-lg border-2 border-accent transition-all duration-300 text-sm md:text-base lg:text-sm 2xl:text-xl hover:bg-accent hover:text-background">
+                <button className="hero-button opacity-0 flex items-center justify-center gap-2 lg:px-3 py-3 lg:py-2 2xl:px-4 2xl:py-3 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-transparent text-accent font-bold rounded-lg border-2 border-accent transition-all duration-300 text-sm md:text-base lg:text-sm 2xl:text-xl hover:bg-accent hover:text-background">
                     <Mail className="w-4 h-4 md:w-5 md:h-5 2xl:w-7 2xl:h-7" />
                     <span>Me Contacter</span>
                 </button>

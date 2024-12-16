@@ -1,16 +1,11 @@
 import AcceuilIllustration from '@/components/AcceuilIllustration'
 import './css/Accueil.css'
 import React from 'react'
-import NavBar from '@/components/NavBar'
 import AccTextes from '@/components/AccTextes'
 import MouseIcon from '@/components/MouseIcon'
 
-
 const Accueil = () => {
-  return <section className='w-full h-dvh flex flex-col'>
-    <NavBar></NavBar>
-
-
+  return <section className='w-full lg:h-[calc(100vh-80px)] flex flex-col'>
     <div className="w-full flex-1 bg-background flex flex-col relative lg:flex-row lg:px-10 xl:px-15 2xl:px-20">
       <div className="bg-background p-5 md:p-8 lg:p-12 xl:p-16 2xl:p-20 w-full lg:w-[60%] flex flex-col  justify-center">
         <AccTextes></AccTextes>

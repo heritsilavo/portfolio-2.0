@@ -14,7 +14,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full bg-background shadow-lg">
+    <nav className="w-full bg-background shadow-lg h-[80px]">
       <div className="_nav opacity-0 mx-4 sm:mx-6 lg:mx-5 xl:mx-8 2xl:mx-20 px-0 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}

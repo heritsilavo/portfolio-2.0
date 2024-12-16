@@ -199,6 +199,15 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
         return codeTimeline;
     }
 
+    const createLogoAnimation = () => {
+        const timeline = gsap.timeline()
+
+        timeline
+            .set("#logo_nextjs", { scale: 0, transformOrigin:"center center" })
+            .to("#logo_nextjs", { opacity: 1, scale: 1, ease: "bounce.out", duration: 1 })
+        return timeline
+    }
+
     useEffect(() => {
         if (inView && !started) {
 
@@ -215,7 +224,11 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
                 .add(createCactusAnimation())
                 .add(createScreensAnimation(), "<")
                 .add(createEyesAnimation(), "<")
-                .add(createCodeAnimation(), "<");
+                .add(createCodeAnimation(), "<")
+                .add(createLogoAnimation(), "+1");
+
+                console.log(masterTimelineRef.current.totalDuration() / 1000);
+                
             setStarted(true)
         } else if (inView && started) {
             masterTimelineRef.current?.play()
@@ -369,7 +382,7 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
             </g>
             <g id="pc">
                 <path id="pc_2" d="M237.047 523.37C230.198 527.812 230.85 534.894 232.4 536.492C332.607 536.492 536.056 536.24 543.297 536.24C550.537 536.24 553.652 528.081 554.304 524.632C559.686 482.069 570.742 393.461 571.916 379.532C573.09 365.602 563.925 359.007 558.952 358.335C484.591 358.166 333.619 357.931 324.617 358.335C315.615 358.738 311.327 372.718 310.674 379.532L296.732 523.37H237.047Z" fill="#6E6E7A" />
-                <g id="logo_nextjs">
+                <g id="logo_nextjs" className='opacity-0'>
                     <circle id="Ellipse" cx="441" cy="452" r="20" fill="#242424" />
                     <g id="N">
                         <path d="M432.911 443.911H435.756V460.089H432.911V443.911Z" fill="white" />

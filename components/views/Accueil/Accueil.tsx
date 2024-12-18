@@ -1,5 +1,4 @@
 import AcceuilIllustration from '@/components/AcceuilIllustration'
-import './css/Accueil.css'
 import React from 'react'
 import AccTextes from '@/components/AccTextes'
 import MouseIcon from '@/components/MouseIcon'
@@ -11,7 +10,7 @@ const Accueil = () => {
         <AccTextes></AccTextes>
       </div>
 
-      <div className="flex-1 w-full lg:w-1/2 relative bg-background flex items-center justify-center px-4 md:px-6 md:mt-6 lg:mt-0 lg:px-8 xl:px-10 2xl:px-12 max-lg:pb-4">
+      <div className="flex-1 w-full lg:w-1/2 relative bg-background flex items-center justify-center px-4 md:px-6 mt-4 md:mt-6 lg:mt-0 lg:px-8 xl:px-10 2xl:px-12 max-lg:pb-4">
         <AcceuilIllustration className='w-full h-full max-w-[600px] xl:max-w-[800px] 2xl:max-w-[1000px]'></AcceuilIllustration>
       </div>
 

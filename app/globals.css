@@ -35,3 +35,14 @@ body {
 /* #4a4a4a */
 /* #ffffff */
 /* #71b3a3 */
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Pour Internet Explorer et Edge */
+    scrollbar-width: none;     /* Pour Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;             /* Pour Chrome, Safari et Opera */
+  }
+}

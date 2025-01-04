@@ -4,7 +4,7 @@ import AccTextes from '@/components/AccTextes'
 import MouseIcon from '@/components/MouseIcon'
 
 const Accueil = () => {
-  return <section className='w-full lg:h-[calc(100vh-80px)] flex flex-col'>
+  return <section className='w-full lg:h-[calc(100dvh-80px)] flex flex-col'>
     <div className="w-full flex-1 bg-background flex flex-col relative lg:flex-row lg:px-10 xl:px-15 2xl:px-20">
       <div className="bg-background px-5 md:px-8 lg:px-12 xl:px-16 2xl:px-20 w-full lg:w-[60%] flex flex-col  justify-center">
         <AccTextes></AccTextes>

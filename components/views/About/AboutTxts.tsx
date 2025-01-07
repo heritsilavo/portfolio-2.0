@@ -25,7 +25,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
       };
 
       const gsapAnimation = gsap.to(containerRef.current, {
-        yPercent: -(100 - (100 / NB_SECTION)),
+        yPercent: -(100 - 100 / NB_SECTION),
         ease: "none",
       });
 
@@ -39,6 +39,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
         anticipatePin: 1,
         pin: true,
         invalidateOnRefresh: true,
+        snap: 1 / (NB_SECTION - 1),
       });
     },
     [mainScrollableRef, triggerRef]
@@ -84,9 +85,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
             Mes compétences
           </h1>
 
-          <div className="w-[90%] lg:w-[80%] relative flex flex-wrap justify-between gap-y-4 mt-14 mb-5">
-            
-          </div>
+          <div className="w-[90%] lg:w-[80%] relative flex flex-wrap justify-between gap-y-4 mt-14 mb-5"></div>
         </div>
 
         <div className="h-[100dvh] flex flex-col items-center justify-center space-y-4">

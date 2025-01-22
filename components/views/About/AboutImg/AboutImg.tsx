@@ -1,4 +1,4 @@
-import MoiTransparentImg from "@/components/views/About/MoiTransparentImg";
+import MoiTransparentImg from "@/components/views/About/AboutImg/MoiTransparentImg";
 import GreenBackGround from "./GreenBackground";
 
 export default function AboutImg() {

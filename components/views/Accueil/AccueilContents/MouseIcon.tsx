@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useMainRef } from "./MainComponent/MainComponent";
+import { useMainRef } from "../../../MainComponent/MainComponent";
 
 type MouseIconProps = {
   className?: string;

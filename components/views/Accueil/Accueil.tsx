@@ -1,7 +1,7 @@
-import AcceuilIllustration from '@/components/AcceuilIllustration'
+import AcceuilIllustration from '@/components/views/Accueil/AccueilContents/AcceuilIllustration'
 import React from 'react'
-import AccTextes from '@/components/AccTextes'
-import MouseIcon from '@/components/MouseIcon'
+import AccTextes from '@/components/views/Accueil/AccueilContents/AccTextes'
+import MouseIcon from '@/components/views/Accueil/AccueilContents/MouseIcon'
 
 const Accueil = () => {
   return <section className='w-full min-h-[100dvh] lg:min-h-[calc(100dvh-80px)] lg:h-[calc(100dvh-80px)] flex flex-col'>

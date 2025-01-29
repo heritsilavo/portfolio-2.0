@@ -14,7 +14,7 @@ export default function TxtMobileSection3() {
             key={index}
             width={150}
             height={0}
-            className="w-[140px] object-cover rounded-sm cursor-pointer mt-5"
+            className="w-[140px] object-cover rounded-xs cursor-pointer mt-5"
             style={{
               boxShadow:
                 "0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1)",

@@ -20,7 +20,7 @@ export default function TxtSections({ className }: TxtSectionsProps) {
                 key={index}
                 width={150}
                 height={0}
-                className="w-[150px] lg:w-[100px] xl:w-[120px] 2xl:w-[170px] object-cover rounded-sm cursor-pointer"
+                className="w-[150px] lg:w-[100px] xl:w-[120px] 2xl:w-[170px] object-cover rounded-xs cursor-pointer"
                 style={{
                   boxShadow:
                     "0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1)",

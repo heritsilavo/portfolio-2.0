@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@utility grid-container {
+  display: grid;
+  height: 200dvh;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 4);
+  padding: calc(var(--spacing) * 2);
+  grid-template-areas:
+    "p1"
+    "p1"
+    "p1"
+    "p2"
+    "p3"
+    "p3"
+    "p4"
+    "p4";
+
+  @variant md {
+    height: 100dvh;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "p1 p2"
+      "p1 p2"
+      "p3 p2"
+      "p3 p2"
+      "p3 p2"
+      "p3 p4"
+      "p5 p6"
+      "p5 p6";
+  }
+
+  @variant xl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "p1 p2 p5"
+      "p1 p2 p5"
+      "p1 p2 p5"
+      "p3 p2 p5"
+      "p3 p2 p5"
+      "p3 p2 p6"
+      "p3 p4 p6"
+      "p3 p4 p6";
+  }
+
+  @variant 2xl {
+    gap: calc(var(--spacing) * 6);
+    padding: calc(var(--spacing) * 3);
+    padding-inline: calc(var(--spacing) * 6);
+  }
+}
+
+@utility projet-item-1 {
+  grid-area: p1;
+}
+
+@utility projet-item-2 {
+  grid-area: p2;
+}
+
+@utility projet-item-3 {
+  grid-area: p3;
+}
+
+@utility projet-item-4 {
+  grid-area: p4;
+}
+
+@utility projet-item-5 {
+  grid-area: p5;
+}
+
+@utility projet-item-6 {
+  grid-area: p6;
+}

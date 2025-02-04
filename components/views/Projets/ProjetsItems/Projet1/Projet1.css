@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@utility p1-container {
+    @apply flex flex-col items-center py-6 px-5 space-y-3
+}
+
+@utility p1-title {
+    @apply text-white font-bold text-[32px];
+
+    @variant lg {
+        @apply text-[24px];
+    }
+
+    @variant xl {
+        @apply text-[32px];
+    }
+
+    @variant 2xl {
+        @apply text-[42px];
+    }
+
+}
+
+@utility p1-description {
+    @apply text-white text-center text-sm;
+
+    @variant lg {
+        @apply text-xs;
+    }
+
+    @variant xl {
+        @apply text-[18px];
+    }
+
+    @variant 2xl {
+        @apply text-[24px];
+    }
+}
+
+@utility p1-illustration {
+    @apply w-full flex-1 relative
+}

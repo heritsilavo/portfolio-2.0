@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@utility p2-container {
+    @apply flex flex-col p-[10px] space-y-1 text-white;
+
+    @variant 2xl {
+        @apply p-[20px] px-[30px] space-y-4;
+    }
+}
+
+@utility p2-img {
+    @apply relative w-[45px] h-[45px];
+
+    @variant lg {
+        @apply w-[37px] h-[37px];
+    }
+
+    @variant xl {
+        @apply w-[45px] h-[45px];
+    }
+
+    @variant 2xl {
+        @apply w-[50px] h-[50px];
+    }
+}

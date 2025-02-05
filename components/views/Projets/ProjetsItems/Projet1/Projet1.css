@@ -24,16 +24,20 @@
 @utility p1-description {
     @apply text-white text-center text-sm;
 
+    @variant md {
+        @apply text-lg;
+    }
+
     @variant lg {
         @apply text-xs;
     }
 
     @variant xl {
-        @apply text-[18px];
+        @apply text-sm;
     }
 
     @variant 2xl {
-        @apply text-[24px];
+        @apply text-lg;
     }
 }
 

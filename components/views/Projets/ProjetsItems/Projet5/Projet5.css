@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@utility p5-container {
+  @apply flex flex-col p-4;
+
+  @variant lg {
+    @apply p-6;
+  }
+
+  @variant xl {
+    @apply p-8;
+  }
+
+  @variant 2xl {
+    @apply p-10;
+  }
+}
+
+@utility p5-image {
+  @apply mb-3 relative hidden;
+
+  @variant lg {
+    @apply inline-block flex-1;
+  }
+}
+
+@utility p5-title {
+  @apply text-white w-full text-3xl font-bold;
+
+  @variant lg {
+    @apply text-xl;
+  }
+
+  @variant xl {
+    @apply text-2xl mt-3;
+  }
+
+  @variant 2xl {
+    @apply text-3xl;
+  }
+}
+
+@utility p5-description {
+  @apply text-white w-full text-lg;
+
+  @variant lg {
+    @apply text-sm mt-2;
+  }
+
+  @variant 2xl {
+    @apply text-lg;
+  }
+}

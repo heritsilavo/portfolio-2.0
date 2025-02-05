@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@utility p3-container {
+    @apply flex flex-col items-center p-[10px] space-y-3 text-white relative;
+
+    @variant md {
+        @apply p-[15px] py-[25px] space-y-3;
+    }
+
+    @variant lg {
+        @apply text-2xl space-y-4 px-[20px] py-[10px];
+    }
+
+    @variant xl {
+        @apply space-y-6 px-[20px] py-[20px];
+    }
+
+    @variant 2xl {
+        @apply space-y-10 px-[35px] py-[30px];
+    }
+}
+
+@utility p3-title {
+    @apply text-3xl font-bold mb-2;
+
+    @variant md {
+        @apply text-4xl mb-4;
+    }
+
+    @variant lg {
+        @apply text-2xl mb-2;
+    }
+
+    @variant xl {
+        @apply text-3xl mb-2;
+    }
+
+    @variant 2xl {
+        @apply text-4xl mb-5;
+    }
+}
+
+@utility p3-text {
+    @apply text-center;
+
+    @variant md {
+        @apply text-lg;
+    }
+
+    @variant lg {
+        @apply text-xs;
+    }
+
+    @variant xl {
+        @apply text-sm;
+    }
+
+    @variant 2xl {
+        @apply text-lg;
+    }
+}
+
+@utility p3-image {
+    @apply w-full flex-1 relative max-h-[50%];
+
+    @variant md {
+        @apply max-h-[25%];
+    }
+
+    @variant hover {
+        transform: scale(1.01);
+    }
+}
+
+@utility p3-button {
+    @apply p-4 w-full text-center rounded-lg text-lg;
+
+    box-shadow: 3px 3px 7px 0px #136055;
+    background: linear-gradient(120deg, #2E8D7F, #136055);
+    transition: all 1s;
+
+    @variant md {
+        @apply mt-3;
+    }
+
+    @variant lg {
+        @apply text-xs p-2 rounded-sm;
+    }
+
+    @variant xl {
+        @apply text-sm p-3 rounded-sm;
+    }
+
+    @variant 2xl {
+        @apply text-lg p-3 rounded-sm;
+    }
+
+    @variant hover {
+        background: linear-gradient(120deg, #2E8D7F, #2E8D7F);
+    }
+}

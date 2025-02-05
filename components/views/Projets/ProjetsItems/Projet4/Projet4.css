@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@utility p4-container {
+    @apply flex flex-col items-center justify-center px-[20px];
+
+    @variant md {
+        @apply py-2;
+    }
+}
+
+@utility p4-image {
+    @apply w-full h-[150px] mb-10 flex justify-center relative;
+
+    @variant md {
+        @apply mb-2 h-[100px];
+    }
+
+    @variant xl {
+        @apply mb-5;
+    }
+
+    @variant 2xl {
+        @apply mb-9 h-[125px];
+    }
+}
+
+@utility p4-text {
+    @apply text-white text-4xl font-bold mt-2;
+
+    @variant md {
+        @apply text-3xl;
+    }
+
+    @variant lg {
+        @apply text-2xl mt-0;
+    }
+
+    @variant xl {
+        @apply text-3xl;
+    }
+
+    @variant 2xl {
+        @apply text-4xl;
+    }
+}

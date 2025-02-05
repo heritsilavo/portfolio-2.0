@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@utility p6-container {
+    @apply flex flex-col items-center p-4;
+
+    @variant lg {
+        @apply p-3
+    }
+
+    @variant 2xl {
+        @apply p-5
+    }
+}
+
+@utility p6-image {
+    @apply w-full h-[100px] flex justify-center items-center relative;
+}
+
+@utility p6-text {
+    @apply w-full flex flex-col items-center text-2xl font-bold mt-3;
+    color: #136055;
+    
+    @variant lg {
+        @apply text-sm mt-1
+    }
+
+    @variant xl {
+        @apply text-lg mt-1
+    }
+
+    @variant 2xl {
+        @apply text-2xl mt-2
+    }
+}

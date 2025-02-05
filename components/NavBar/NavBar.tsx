@@ -1,13 +1,13 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import gsap from 'gsap';
+"use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import gsap from "gsap";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   useEffect(() => {
-    gsap.to("._nav", { opacity: 1 })
-  }, [isMenuOpen])
+    gsap.to("._nav", { opacity: 1 });
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,7 +18,7 @@ const NavBar = () => {
       <div className="_nav opacity-0 mx-4 sm:mx-6 lg:mx-5 xl:mx-8 2xl:mx-20 px-0 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className='text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] 2xl:text-[36px] italic'>
+          <div className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] 2xl:text-[36px] italic">
             <Link href="/" className="text-accent font-bold">
               Heritsilavo
             </Link>
@@ -57,16 +57,24 @@ const NavBar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex text-[16px] sm:text-[18px] md:text-sm xl:text-md 2xl:text-xl space-x-8 lg:space-x-10 2xl:space-x-16 text-gray-600 font-medium">
-            <Link href="/" className="hover:text-accent transition-colors duration-300">
+            <Link
+              href="/"
+              className="hover:text-accent transition-colors duration-300"
+            >
               Accueil
             </Link>
-            <Link href="/" className="hover:text-accent transition-colors duration-300">
-              Services
+            <Link
+              href="#about_view"
+              className="hover:text-accent transition-colors duration-300"
+              scroll
+            >
+              A propos
             </Link>
-            <Link href="/" className="hover:text-accent transition-colors duration-300">
-              Compétences
-            </Link>
-            <Link href="/" className="hover:text-accent transition-colors duration-300">
+            <Link
+              href="#project_view"
+              className="hover:text-accent transition-colors duration-300"
+              scroll
+            >
               Projets
             </Link>
           </div>
@@ -77,16 +85,22 @@ const NavBar = () => {
       {isMenuOpen && (
         <div className=" _nav opacity-0  md:hidden absolute top-20 left-0 w-full bg-background shadow-lg z-20">
           <div className="flex flex-col items-center space-y-4 py-4">
-            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
+            <Link
+              href="/"
+              className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300"
+            >
               Accueil
             </Link>
-            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
-              Services
+            <Link
+              href="#about_view"
+              className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300"
+            >
+              A propos
             </Link>
-            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
-              Compétences
-            </Link>
-            <Link href="/" className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300">
+            <Link
+              href="#project_view"
+              className="text-[16px] sm:text-[18px] text-gray-600 hover:text-accent transition-colors duration-300"
+            >
               Projets
             </Link>
           </div>
@@ -94,7 +108,6 @@ const NavBar = () => {
       )}
     </nav>
   );
-
 };
 
 export default NavBar;

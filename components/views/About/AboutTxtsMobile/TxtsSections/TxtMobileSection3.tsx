@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function TxtMobileSection3() {
   return (
-    <div className="w-[full] text-center space-y-3 mt-5">
+    <div className="w-[full] text-center space-y-3 mt-5 mb-3">
       <h1 className="text-foreground text-2xl font-bold lg:text-xl 2xl:text-2xl my-3 lg:my-0">
         Quels genre de livre je lis ?
       </h1>

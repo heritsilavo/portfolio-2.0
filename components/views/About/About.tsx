@@ -10,6 +10,7 @@ export default function About() {
   return (
     <>
       <section
+        id="about_view"
         ref={mobileAboutContainerRef}
         className="lg:w-0 lg:h-0 lg:overflow-hidden lg:scale-0"
       >

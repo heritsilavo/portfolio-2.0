@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@utility project-green-background {
+  @apply absolute top-0 left-0 w-full h-full overflow-hidden;
+}
+
+@utility project-green-background-light {
+    @apply w-[400px] h-[400px] relative;
+
+    @variant md {
+        @apply w-[600px] h-[600px]
+    }
+    
+    @variant xl {
+        @apply w-[800px] h-[800px]
+    }
+
+    @variant 2xl {
+        @apply w-[1000px] h-[1000px]
+    }
+}

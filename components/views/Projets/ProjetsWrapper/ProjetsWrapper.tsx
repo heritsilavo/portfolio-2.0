@@ -36,16 +36,16 @@ export default function ProjetsWrapper({
       background: "#40b3a2",
     });
 
-    ScrollTrigger.create({
-      scroller: scrollerRef?.current,
-      trigger: greenBgRef?.current,
-      start: "top 75%",
-      toggleActions: "play none reverse none",
-      onEnter: () => {
-        gsap.to(greenBgRef.current, {
-          background: "#136055",
-        });
-      },
+    gsap.to(greenBgRef.current, {
+      background: "#136055",
+      scrollTrigger: {
+        scroller: scrollerRef?.current,
+        trigger: greenBgRef?.current,
+        start: "top 70%",
+        end: "bottom 50%",
+        toggleActions: "play none none reverse",
+        scrub: true,
+      }
     });
   }, [scrollerRef]);
 

@@ -14,7 +14,7 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
     const [started, setStarted] = useState(false);
 
     const { ref: svgRef, inView } = useInView({
-        threshold: 0.5, // 50% visibility threshold
+        threshold: 0.5, // 50% visibility threshol
     });
 
     // Séparer les configurations d'animation pour plus de clarté

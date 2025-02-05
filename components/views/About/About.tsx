@@ -12,7 +12,7 @@ export default function About() {
       <section
         id="about_view"
         ref={mobileAboutContainerRef}
-        className="lg:w-0 lg:h-0 lg:overflow-hidden lg:scale-0"
+        className="lg:w-0 lg:h-0 lg:overflow-hidden lg:scale-0 mb-0 overflow-hidden"
       >
         <AboutImg />
         <AboutTxtsMobile />

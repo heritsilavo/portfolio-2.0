@@ -21,7 +21,7 @@ export default function ProjectItemsWrapper({
       className={` ${!!href && "cursor-pointer"} ${className} `}
       title={href}
     >
-      <Link ref={linkRef} className="invisible" target="_blank" href={href || "#"}>click</Link>
+      <Link ref={linkRef} className="invisible inline-block w-0 h-0 overflow-hidden" target="_blank" href={href || "#"}>click</Link>
       {children}
     </div>
   );

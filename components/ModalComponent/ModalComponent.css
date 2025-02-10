@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@utility modal-transparent-background {
+  @apply absolute w-[100vw] h-[100dvh] top-0 left-0 m-0 z-5 flex items-center justify-center;
+}
+
+.modal-transparent-background {
+  background-color: rgba(49, 45, 45, 0.256);
+}
+
+@utility modal-container {
+  @apply w-[95%] relative overflow-hidden bg-white rounded-sm;
+}
+
+@utility modal-header {
+  @apply h-[45px] w-full flex items-center justify-center text-gray-500 text-xl font-bold;
+}
+
+@utility modal-content {
+  @apply relative w-full border-y-2 border-gray-400 p-3;
+}
+
+@utility modal-footer {
+  @apply h-[50px] w-full flex items-center justify-end space-x-3 px-3;
+}
+
+@utility modal-btn {
+  @apply p-2 text-white font-bold border-gray-500 rounded-md;
+}
+
+@utility modal-btn-cancel {
+  @apply bg-gray-400;
+}
+@utility modal-btn-confirm {
+  @apply bg-[#71b3a3];
+}
+
+/**
+modal-header
+modal-content
+modal-footer
+*/

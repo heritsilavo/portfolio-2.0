@@ -1,7 +1,24 @@
+"use client";
+import { useModal } from "@/components/ModalComponent/ModalComponent";
+import { Livre } from "@/models/livre";
 import { getReadedBooks } from "@/utils/livres";
 import Image from "next/image";
+import ProposerLivreModalContent from "../../ProposerLivreModalContent/ProposerLivreModalContent";
 
 export default function TxtMobileSection3() {
+  const { modal, setModal } = useModal();
+
+  const onClickLivre = (livre: Livre) => {
+    if (livre.type == "PROPOSER") {
+      setModal({
+        ...modal,
+        open: true,
+        header: "Me proposer un livre",
+        content: <ProposerLivreModalContent />,
+      });
+    }
+  };
+
   return (
     <div className="w-[full] text-center space-y-3 mt-5 mb-3">
       <h1 className="text-foreground text-2xl font-bold lg:text-xl 2xl:text-2xl my-3 lg:my-0">
@@ -21,6 +38,7 @@ export default function TxtMobileSection3() {
             }}
             alt={book.title}
             src={book.imgUrl}
+            onClick={() => onClickLivre(book)}
           />
         ))}
       </div>

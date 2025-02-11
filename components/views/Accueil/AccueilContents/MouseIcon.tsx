@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useMainRef } from "../../../MainComponent/MainComponent";
+import Link from "next/link";
 
 type MouseIconProps = {
   className?: string;
@@ -15,6 +16,7 @@ const MouseIcon: React.FC<MouseIconProps> = ({
 }) => {
   const outlineRef = useRef<SVGPathElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null)
   const scrollerRef = useMainRef();
 
   // Memoize timeline creation to prevent unnecessary recreation
@@ -124,8 +126,9 @@ const MouseIcon: React.FC<MouseIconProps> = ({
     };
   }, [initAnimations, timelines]);
 
-  return (
-    <svg
+  return <>
+  <Link ref={linkRef} className="inline-block w-0 h-0 overflow-hidden" href="#about_view">Click</Link>
+  <svg
       ref={svgRef}
       id="mouse-svg"
       className={`${className} opacity-0 cursor-pointer`}
@@ -133,6 +136,7 @@ const MouseIcon: React.FC<MouseIconProps> = ({
       fill="none"
       onMouseEnter={() => handleMouseInteraction(true)}
       onMouseLeave={() => handleMouseInteraction(false)}
+      onClick={() => linkRef.current?.click()}
     >
       <g id="mouse">
         <path
@@ -149,7 +153,7 @@ const MouseIcon: React.FC<MouseIconProps> = ({
         />
       </g>
     </svg>
-  );
+  </>;
 };
 
 export default React.memo(MouseIcon);

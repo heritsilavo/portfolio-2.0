@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @utility modal-transparent-background {
-  @apply absolute w-[100vw] h-[100dvh] top-0 left-0 m-0 z-5 flex items-center justify-center;
+  @apply absolute w-[100vw] h-[100dvh] top-0 left-0 m-0 z-[99999] flex items-center justify-center;
 }
 
 .modal-transparent-background {
@@ -9,7 +9,27 @@
 }
 
 @utility modal-container {
-  @apply w-[95%] relative overflow-hidden bg-white rounded-sm;
+  @apply w-[95%] relative overflow-hidden bg-white rounded-sm max-h-[60%];
+
+  @variant sm {
+    @apply w-[65%]
+  }
+
+  @variant md {
+    @apply w-[50%]
+  }
+
+  @variant lg {
+    @apply w-[40%]
+  }
+
+  @variant xl {
+    @apply w-[30%]
+  }
+
+  @variant 2xl {
+    @apply w-[20%]
+  }
 }
 
 @utility modal-header {
@@ -17,7 +37,7 @@
 }
 
 @utility modal-content {
-  @apply relative w-full border-y-2 border-gray-400 p-3;
+  @apply relative w-full border-y-2 border-gray-400;
 }
 
 @utility modal-footer {

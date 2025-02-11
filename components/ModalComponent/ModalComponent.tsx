@@ -33,11 +33,13 @@ export default function ModalComponent({ children }: ModalComponentProps) {
     <ModalContext.Provider value={{ modal, setModal }}>
       {
         modal.open && <div onClick={hideModal}  className="modal-transparent-background">
-        <div className="modal-container">
+        <div onClick={(event)=>{event.stopPropagation()}} className="modal-container">
           <div className="modal-header">
             {modal.header || "Modal header"}
           </div>
-          <div className="modal-content"></div>
+          <div className="modal-content">
+            {modal.content}
+          </div>
           <div className="modal-footer">
             <button onClick={hideModal} className="modal-btn modal-btn-cancel">{modal.btnsLabel?.cancel || "Annuler"}</button>
             <button onClick={hideModal} className="modal-btn modal-btn-confirm">{modal.btnsLabel?.confirm || "Confirmer"}</button>

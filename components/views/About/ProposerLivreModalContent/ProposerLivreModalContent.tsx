@@ -1,26 +1,66 @@
-export default function ProposerLivreModalContent() {
+import { ProposerLivre } from "@/models/proposer-livre";
+import "./ProposerLivreModalContent.css";
+import React from "react";
+
+type ProposerLivreModalContentProps = {
+  formData: ProposerLivre;
+  setFormData: React.Dispatch<React.SetStateAction<ProposerLivre>>;
+};
+
+export default function ProposerLivreModalContent({
+  formData,
+  setFormData,
+}: ProposerLivreModalContentProps) {
   return (
-    <div className="w-full py-3 flex flex-col items-center space-y-3">
-      <div className="w-[95%] sm: flex flex-col space-y-2">
-        <label htmlFor="titre" className="text-gray-500 text-lg">
-          Titre du livre:
+    <div className="form-container">
+      <div className="input-box">
+        <label htmlFor="nom" className="form-label">
+          Qui est celui qui propose ?:
         </label>
         <input
-          className="h-[40px] text-lg text-gray-800 border p-1 border-gray-300 rounded-md"
+          className="my-input h-[40px] text-lg"
           type="text"
-          name="titre"
-          id="titre"
+          name="nom"
+          id="nom"
+          onChange={(e)=>setFormData(old=>({...old, nom: e.target.value}))}
         />
       </div>
 
-      <div className="w-[95%] flex flex-col space-y-2">
-        <label htmlFor="description" className="text-gray-500 text-lg">
+      <div className="input-box">
+        <label htmlFor="contact" className="form-label">
+          Votre contact:
+        </label>
+        <input
+          className="my-input h-[40px] text-lg"
+          type="text"
+          name="contact"
+          id="contact"
+          onChange={(e)=>setFormData(old=>({...old, contact: e.target.value}))}
+        />
+      </div>
+
+      <div className="input-box">
+        <label htmlFor="titre" className="form-label">
+          Titre du livre:
+        </label>
+        <input
+          className="my-input h-[40px] text-lg"
+          type="text"
+          name="titre"
+          id="titre"
+          onChange={(e)=>setFormData(old=>({...old, title: e.target.value}))}
+        />
+      </div>
+
+      <div className="input-box">
+        <label htmlFor="description" className="form-label">
           Description:
         </label>
         <textarea
-          className="text-lg text-gray-800 border p-1 border-gray-300 rounded-md"
+          className="my-input text-lg "
           name="description"
           id="description"
+          onChange={(e)=>setFormData(old=>({...old, description: e.target.value}))}
         ></textarea>
       </div>
     </div>

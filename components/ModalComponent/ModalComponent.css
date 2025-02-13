@@ -45,7 +45,7 @@
 }
 
 @utility modal-btn {
-  @apply p-2 text-white font-bold border-gray-500 rounded-md;
+  @apply p-2 text-white font-bold border-gray-500 rounded-md cursor-pointer;
 }
 
 @utility modal-btn-cancel {

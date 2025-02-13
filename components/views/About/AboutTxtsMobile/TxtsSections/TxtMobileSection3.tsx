@@ -4,9 +4,16 @@ import { Livre } from "@/models/livre";
 import { getReadedBooks } from "@/utils/livres";
 import Image from "next/image";
 import ProposerLivreModalContent from "../../ProposerLivreModalContent/ProposerLivreModalContent";
+import { ProposerLivre } from "@/models/proposer-livre";
+import { useState } from "react";
 
 export default function TxtMobileSection3() {
   const { modal, setModal } = useModal();
+  const [formData, setFormData] = useState<ProposerLivre>(new ProposerLivre());
+
+  const onConfirmSuggestBook = async function () {
+    console.log("SUGGESTION DE LIVRE", formData);
+  };
 
   const onClickLivre = (livre: Livre) => {
     if (livre.type == "PROPOSER") {
@@ -14,7 +21,13 @@ export default function TxtMobileSection3() {
         ...modal,
         open: true,
         header: "Me proposer un livre",
-        content: <ProposerLivreModalContent />,
+        content: (
+          <ProposerLivreModalContent
+            formData={formData}
+            setFormData={setFormData}
+          />
+        ),
+        onConfirm: onConfirmSuggestBook,
       });
     }
   };

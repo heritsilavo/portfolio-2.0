@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
-import "./ModalComponent.css"
+import "./ModalComponent.css";
 
 type ModalComponentProps = {
   children: React.ReactNode;
@@ -11,9 +11,15 @@ type ModalContextType = {
   content: React.ReactNode;
   header?: string;
   btnsLabel?: {
-    cancel: string,
-    confirm: string
-  }
+    cancel: string;
+    confirm: string;
+  };
+  onConfirm?: () => void;
+  onClose?: () => void;
+  noHeader?: boolean;
+  noFooter?: boolean;
+  modalContainerClassname?: string;
+  modalContentClassname?: string;
 };
 
 const ModalContext = createContext<{
@@ -27,26 +33,55 @@ export default function ModalComponent({ children }: ModalComponentProps) {
     open: false,
   });
 
-  const hideModal = ()=>{setModal(()=>({...modal, open:false}))};
+  const hideModal = () => {
+    setModal(() => ({ ...modal, open: false }));
+    if (!!modal.onClose) {
+      modal.onClose();
+    }
+  };
+
+  const onCLickConfirm = () => {
+    if (!!modal.onConfirm) {
+      modal.onConfirm();
+    }
+    hideModal();
+  };
 
   return (
     <ModalContext.Provider value={{ modal, setModal }}>
-      {
-        modal.open && <div onClick={hideModal}  className="modal-transparent-background">
-        <div onClick={(event)=>{event.stopPropagation()}} className="modal-container">
-          <div className="modal-header">
-            {modal.header || "Modal header"}
-          </div>
-          <div className="modal-content">
-            {modal.content}
-          </div>
-          <div className="modal-footer">
-            <button onClick={hideModal} className="modal-btn modal-btn-cancel">{modal.btnsLabel?.cancel || "Annuler"}</button>
-            <button onClick={hideModal} className="modal-btn modal-btn-confirm">{modal.btnsLabel?.confirm || "Confirmer"}</button>
+      {modal.open && (
+        <div onClick={hideModal} className="modal-transparent-background">
+          <div
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+            className={`modal-container ${modal?.modalContainerClassname || ""}`}
+          >
+            {!modal.noHeader && (
+              <div className="modal-header">
+                {modal.header || "Modal header"}
+              </div>
+            )}
+            <div className={`modal-content ${modal.modalContentClassname}`}>{modal.content}</div>
+            {!modal.noFooter && (
+              <div className="modal-footer">
+                <button
+                  onClick={hideModal}
+                  className="modal-btn modal-btn-cancel"
+                >
+                  {modal.btnsLabel?.cancel || "Annuler"}
+                </button>
+                <button
+                  onClick={onCLickConfirm}
+                  className="modal-btn modal-btn-confirm"
+                >
+                  {modal.btnsLabel?.confirm || "Confirmer"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      }
+      )}
 
       {children}
     </ModalContext.Provider>
@@ -54,5 +89,5 @@ export default function ModalComponent({ children }: ModalComponentProps) {
 }
 
 export const useModal = () => {
-    return useContext(ModalContext);
-}
+  return useContext(ModalContext);
+};

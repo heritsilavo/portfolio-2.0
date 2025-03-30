@@ -1,14 +1,11 @@
-export class ProposerLivre {
-    title: string;
-    description: string;
-    nom?: string;
-    contact?: string;
-  
-    constructor(data?: { description: string; title: string, nom: string, contact: string}) {
-      this.title = data?.title || "";
-      this.description = data?.description || "";
-      this.nom = data?.nom || "";
-      this.contact = data?.contact || "";
-    }
-  }
-  
+import { z } from "zod";
+
+export const ProposerLivreSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+  nom: z.string().min(1),
+  contact: z.string().min(1),
+});
+
+export type ProposerLivre = z.infer<typeof ProposerLivreSchema>;
+export const defaultProposerLivre = {contact:"",description: "", nom: "", title: ""}

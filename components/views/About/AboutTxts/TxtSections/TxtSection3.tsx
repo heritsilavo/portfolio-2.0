@@ -4,8 +4,9 @@ import { Livre } from "@/models/livre";
 import { getReadedBooks } from "@/utils/livres";
 import Image from "next/image";
 import ProposerLivreModalContent from "../../ProposerLivreModalContent/ProposerLivreModalContent";
-import { useEffect, useState } from "react";
-import { ProposerLivre } from "@/models/proposer-livre";
+import { useRef } from "react";
+import { defaultProposerLivre, ProposerLivre, ProposerLivreSchema } from "@/models/proposer-livre";
+import { z } from "zod";
 
 type TxtSectionsProps = {
   className?: string;
@@ -13,51 +14,62 @@ type TxtSectionsProps = {
 
 export default function TxtSections({ className }: TxtSectionsProps) {
   const { modal, setModal } = useModal();
-  const [formData, setFormData] = useState<ProposerLivre>(new ProposerLivre());
+  const formDataRef = useRef<ProposerLivre>(defaultProposerLivre);
 
-  const onConfirmSuggestBook = async function () {
-    console.log("SUGGESTION DE LIVRE", formData);
-    
-    setModal((old) => ({ ...old, open: false }));
+  const handleChangeForm = function () {
+    try {
+      ProposerLivreSchema.parse(formDataRef.current)
+      setModal((old) => ({...old, confirmBtnDisabled:false}))
+      console.log("HAHAA");
+      
+    } catch (e) {
+      setModal((old) => ({...old, confirmBtnDisabled:true}))
+      if (e instanceof z.ZodError) {
+        console.log(e.errors);
+      }
+    }
+  }
 
-    // setModal((old) => ({
-    //   ...old,
-    //   open: true,
-    //   header: "Me proposer un livre",
-    //   content: <div>...</div>,
-    //   noHeader: true,
-    //   noFooter: true,
-    //   modalContainerClassname: "h-[100px] w-[100px] relative",
-    //   modalContentClassname:
-    //     "w-full h-full relative flex items-center justify-center",
-    //   onClose() {
-    //     setModal((old) => ({
-    //       ...old,
-    //       noHeader: false,
-    //       noFooter: false,
-    //       modalContainerClassname: "",
-    //       modalContentClassname:"",
-    //       onClose() {
-              
-    //       },
-    //     }));      
-    //   },
-    // }));
+  const onConfirmSuggestBook = async () => {
+    try {
+      const response = await fetch('/api/livre/proposer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataRef.current),
+        cache: "force-cache"
+      });
+  
+      if (!response.ok) {
+        // Si la réponse n'est pas OK, on essaie de récupérer le message d'erreur du serveur
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur lors de la soumission du livre');
+      }
+  
+      const result = await response.json();
+      console.log('Livre proposé avec succès :', result);
+    } catch (error) {
+      console.error('Erreur :', error);
+      // Vous pouvez également afficher l'erreur à l'utilisateur ici
+    }
   };
 
   const onClickLivre = (livre: Livre) => {
     if (livre.type == "PROPOSER") {
+      formDataRef.current = defaultProposerLivre;
       setModal({
         ...modal,
         open: true,
         header: "Me proposer un livre",
         content: (
           <ProposerLivreModalContent
-            formData={formData}
-            setFormData={setFormData}
+            formDataRef={formDataRef}
+            onChange={handleChangeForm}
           />
         ),
         onConfirm: onConfirmSuggestBook,
+        confirmBtnDisableByDefault: true
       });
     }
   };

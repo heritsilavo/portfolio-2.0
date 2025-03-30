@@ -9,7 +9,7 @@
 }
 
 @utility modal-container {
-  @apply w-[95%] relative overflow-hidden bg-white rounded-sm max-h-[60%];
+  @apply w-[95%] relative overflow-hidden bg-white rounded-sm shadow-lg;
 
   @variant sm {
     @apply w-[65%]
@@ -45,7 +45,7 @@
 }
 
 @utility modal-btn {
-  @apply p-2 text-white font-bold border-gray-500 rounded-md;
+  @apply p-2 text-white font-bold border-gray-500 rounded-md cursor-pointer h-[80%];
 }
 
 @utility modal-btn-cancel {
@@ -53,6 +53,10 @@
 }
 @utility modal-btn-confirm {
   @apply bg-[#71b3a3];
+}
+@utility btn-disable {
+  @apply bg-gray-400;
+  cursor: auto;
 }
 
 /**

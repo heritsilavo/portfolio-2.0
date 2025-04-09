@@ -3,7 +3,7 @@
     -webkit-overflow-scrolling: touch; /* Support pour mobile */
     overflow-x: hidden;
     overflow-y: auto;
-    position: absolute; /* Correctement positionné */
+    position: fixed; /* Correctement positionné */
     top: 0;
     left: 0;
     width: 100vw;

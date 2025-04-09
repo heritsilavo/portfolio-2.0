@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo -p 3001",
+    "dev:prisma": "npx prisma db push && next dev --turbo -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint"

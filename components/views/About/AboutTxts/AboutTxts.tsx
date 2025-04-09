@@ -1,6 +1,4 @@
 "use client";
-import { getReadedBooks } from "@/utils/livres";
-import Image from "next/image";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
 import { RefObject, useCallback, useContext, useEffect, useRef } from "react";
@@ -23,27 +21,36 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
 
   const initAnimations = useCallback(
     function () {
-      const getScrollAmmount = () => {
-        return containerRef.current?.getBoundingClientRect().height;
-      };
 
-      const gsapAnimation = gsap.to(containerRef.current, {
-        yPercent: -(100 - 100 / NB_SECTION),
-        ease: "none",
-      });
 
-      ScrollTrigger.create({
-        scroller: mainScrollableRef?.current,
-        trigger: triggerRef.current,
-        animation: gsapAnimation,
-        scrub: 1,
-        start: "top top",
-        end: `+=${getScrollAmmount()}`,
-        anticipatePin: 1,
-        pin: true,
-        invalidateOnRefresh: true,
-        //snap: 1 / (NB_SECTION - 1),
-      });
+      if (!!mainScrollableRef?.current) {
+        const getScrollAmmount = () => {
+          return containerRef.current?.getBoundingClientRect().height;
+        };
+
+        const gsapAnimation = gsap.to(containerRef.current, {
+          yPercent: -(100 - 100 / NB_SECTION),
+          ease: "none",
+        });
+
+        // ScrollTrigger.scrollerProxy(mainScrollableRef?.current, {
+        //   pinType: "fixed"
+        // })
+
+        ScrollTrigger.create({
+          scroller: mainScrollableRef?.current,
+          trigger: triggerRef.current,
+          animation: gsapAnimation,
+          scrub: 1,
+          start: "top top",
+          end: `+=${getScrollAmmount()}`,
+          anticipatePin: 3,
+          pin: true,
+          invalidateOnRefresh: true,
+          //snap: 1 / (NB_SECTION - 1),
+        });
+      }
+
     },
     [mainScrollableRef, triggerRef]
   );
@@ -57,10 +64,9 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
 
   return (
     <div
-      ref={triggerRef}
       className="overflow-y-hidden relative bg-background w-1/2 h-[100dvh] z-10 p-0"
     >
-      <div ref={containerRef} className={`h-[${100 * NB_SECTION}vh]`}>
+      <div ref={containerRef} style={{ height: `${100 * NB_SECTION}vh`, willChange: "transform" }}>
         <TxtSections1 />
         <TxtSections2 />
         <TxtSections3 />

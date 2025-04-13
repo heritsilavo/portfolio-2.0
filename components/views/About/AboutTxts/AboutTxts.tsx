@@ -33,9 +33,6 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
           ease: "none",
         });
 
-        // ScrollTrigger.scrollerProxy(mainScrollableRef?.current, {
-        //   pinType: "fixed"
-        // })
 
         ScrollTrigger.create({
           scroller: mainScrollableRef?.current,
@@ -44,10 +41,9 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
           scrub: 1,
           start: "top top",
           end: `+=${getScrollAmmount()}`,
-          anticipatePin: 3,
           pin: true,
-          invalidateOnRefresh: true,
-          //snap: 1 / (NB_SECTION - 1),
+          anticipatePin: 3,
+          invalidateOnRefresh: true
         });
       }
 
@@ -66,7 +62,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
     <div
       className="overflow-y-hidden relative bg-background w-1/2 h-[100dvh] z-10 p-0"
     >
-      <div ref={containerRef} style={{ height: `${100 * NB_SECTION}vh`, willChange: "transform" }}>
+      <div ref={containerRef} style={{ height: `${100 * NB_SECTION}vh`, willChange: "position" }}>
         <TxtSections1 />
         <TxtSections2 />
         <TxtSections3 />

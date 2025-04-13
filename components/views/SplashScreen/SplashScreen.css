@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@utility splash-screen-container {
+    @apply h-[100dvh] w-[100vw] m-0 flex items-center justify-center bg-[#40b3a2];
+}

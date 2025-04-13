@@ -21,9 +21,9 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
 
   const initAnimations = useCallback(
     function () {
-
-
       if (!!mainScrollableRef?.current) {
+        console.log("HELLLLLLLLLLLLLOOOOOOOOOOOOOOOOOO");
+        
         const getScrollAmmount = () => {
           return containerRef.current?.getBoundingClientRect().height;
         };
@@ -48,7 +48,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
       }
 
     },
-    [mainScrollableRef, triggerRef]
+    [mainScrollableRef, triggerRef, containerRef]
   );
 
   useEffect(

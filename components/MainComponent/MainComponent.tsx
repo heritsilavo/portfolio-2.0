@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import "./MainComponent.css";
 import ModalComponent from "../ModalComponent/ModalComponent";
 
@@ -13,12 +13,13 @@ export const MainRefContext =
 export default function MainComponent({ children }: MainComponentProps) {
   const mainRef = useRef<HTMLDivElement>(null);
 
+
   return (
     <MainRefContext.Provider value={mainRef}>
       <ModalComponent>
         <main
           ref={mainRef}
-          className="__scrollable__main__ w-[100vw] h-[100dvh] overflow-x-hidden overflow-y-auto absolute top-0 left-0"
+          className="__scrollable__main__ w-[100vw] h-[100dvh] overflow-x-hidden overflow-y-auto"
         >
           {children}
         </main>

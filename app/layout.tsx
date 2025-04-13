@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className='antialiased relative font-inter'>
+      <body className='relative font-inter'>
         {children}
       </body>
     </html>

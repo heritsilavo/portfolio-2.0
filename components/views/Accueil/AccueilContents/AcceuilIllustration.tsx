@@ -2,12 +2,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useInView } from 'react-intersection-observer'
+import { useStartAccAnimation } from '@/components/MainComponent/MainComponent'
 
 type AcceuilIllustrationProps = {
     className: string;
 }
 
 const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) => {
+    const startAnimations = useStartAccAnimation()
 
     // Utiliser useRef pour stocker les références aux timelines
     const masterTimelineRef = useRef<GSAPTimeline | null>(null);
@@ -209,7 +211,7 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
     }
 
     useEffect(() => {
-        if (inView && !started) {
+        if (inView && !started && startAnimations) {
 
             // Créer la timeline principale
             masterTimelineRef.current = gsap.timeline();
@@ -230,7 +232,7 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
                 console.log(masterTimelineRef.current.totalDuration() / 1000);
                 
             setStarted(true)
-        } else if (inView && started) {
+        } else if (inView && started && startAnimations) {
             masterTimelineRef.current?.play()
         }
         else {
@@ -242,7 +244,7 @@ const AcceuilIllustration: React.FC<AcceuilIllustrationProps> = ({ className }) 
         return () => {
             masterTimelineRef.current?.kill();
         };
-    }, [inView]);
+    }, [inView, startAnimations]);
 
     return <svg ref={svgRef} id='svg-illustration' className={className + " overflow-visible "} viewBox="0 0 746 556" fill="none">
         <g className='hidden' id="illustration">

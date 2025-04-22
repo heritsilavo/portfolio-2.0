@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { useStartAccAnimation } from "../MainComponent/MainComponent";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const startAnimations = useStartAccAnimation()
+
   useEffect(() => {
-    gsap.to("._nav", { opacity: 1 });
-  }, [isMenuOpen]);
+    startAnimations && gsap.to("._nav", { opacity: 1 });
+  }, [isMenuOpen, startAnimations]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

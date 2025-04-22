@@ -1,23 +1,20 @@
 "use client"
 import "./SplashScreen.css"
 import gsap from "gsap";
-import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect } from "react";
 
 type LoadinScreenProps = {
-    loadingAnimationFinished?: boolean;
-    setLoadingAnimationFinished?: Dispatch<SetStateAction<boolean>>
+    loadingAnimationFinished: boolean;
+    setLoadingAnimationFinished: Dispatch<SetStateAction<boolean>>
 }
 
 export default function SplashScreen({ loadingAnimationFinished, setLoadingAnimationFinished }: LoadinScreenProps) {
-    
-    const router = useRouter()
 
     useEffect(() => {
         const masterTimeline = gsap.timeline({
             onComplete: () => {
                 setTimeout(() => {
-                    router.replace("/heritsilavo")
+                    setLoadingAnimationFinished(true)
                 }, 1000);
             }
         });
@@ -76,7 +73,7 @@ export default function SplashScreen({ loadingAnimationFinished, setLoadingAnima
     }, []);
 
     return (
-        <div className={"splash-screen-container "}>
+        <div className={"splash-screen-container absolute top-0 left-0 z-50 "+(loadingAnimationFinished && "hidden")}>
             <svg id="svg" className="hidden" width="526" height="287" viewBox="0 0 526 287" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="item">
                     <g id="Logo">

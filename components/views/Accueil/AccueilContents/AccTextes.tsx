@@ -4,9 +4,12 @@ import { Download, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 import SocialIcons from "./SocialIconsWithWavyLines";
 import Link from "next/link";
+import { useStartAccAnimation } from "@/components/MainComponent/MainComponent";
 
 export default function HeroSection() {
   const timelineRef = useRef<GSAPTimeline | null>(null);
+
+  const startAnimation = useStartAccAnimation();
 
   const getRandomOffset = (val: number) => {
     const offset = Math.random() > 0.5 ? val : -val;
@@ -47,7 +50,8 @@ export default function HeroSection() {
       delay: 0.1,
     });
 
-    timelineRef.current
+    if (startAnimation) {
+      timelineRef.current
       .set(".hero-animated", { opacity: 1 })
       .set([".hero-title", ".hero-subtitle"], {
         y: () => getRandomOffset(30),
@@ -97,11 +101,12 @@ export default function HeroSection() {
         },
         "<0.4"
       );
+    }
 
     return () => {
       timelineRef.current?.kill();
     };
-  }, []);
+  }, [startAnimation]);
 
   return (
     <div className="hero-container">

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useMainRef } from "../../../MainComponent/MainComponent";
+import { useMainRef, useStartAccAnimation } from "../../../MainComponent/MainComponent";
 import Link from "next/link";
 
 type MouseIconProps = {
@@ -18,6 +18,8 @@ const MouseIcon: React.FC<MouseIconProps> = ({
   const svgRef = useRef<SVGSVGElement>(null);
   const linkRef = useRef<HTMLAnchorElement>(null)
   const scrollerRef = useMainRef();
+
+  const startAnimation = useStartAccAnimation()
 
   // Memoize timeline creation to prevent unnecessary recreation
   const timelines = useMemo(
@@ -117,14 +119,14 @@ const MouseIcon: React.FC<MouseIconProps> = ({
   }, []);
 
   useEffect(() => {
-    initAnimations();
+    startAnimation && initAnimations();
 
     return () => {
       // Clean up timelines
       Object.values(timelines).forEach((timeline) => timeline.kill());
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [initAnimations, timelines]);
+  }, [initAnimations, timelines, startAnimation]);
 
   return <>
   <Link ref={linkRef} className="inline-block w-0 h-0 overflow-hidden" href="#about_view">Click</Link>

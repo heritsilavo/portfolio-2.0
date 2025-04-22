@@ -1,7 +1,8 @@
 "use client";
-import React, { createContext, useContext, useRef } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import "./MainComponent.css";
 import ModalComponent from "../ModalComponent/ModalComponent";
+import SplashScreen from "../views/SplashScreen/SplashScreen";
 
 type MainComponentProps = {
   children: React.ReactNode;
@@ -10,19 +11,27 @@ type MainComponentProps = {
 export const MainRefContext =
   createContext<React.RefObject<HTMLDivElement> | null>(null);
 
+const StartAccAnimationsContext = createContext(false);
+
 export default function MainComponent({ children }: MainComponentProps) {
   const mainRef = useRef<HTMLDivElement>(null);
 
+  const [loadingAnimationFinished, setLoadingAnimationFinished] = useState(false);
+
   return (
     <MainRefContext.Provider value={mainRef}>
-      <ModalComponent>
-        <main
-          ref={mainRef}
-          className="__scrollable__main__ w-[100vw] h-[100dvh] overflow-x-hidden overflow-y-auto absolute top-0 left-0"
-        >
-          {children}
-        </main>
-      </ModalComponent>
+      <StartAccAnimationsContext.Provider value={loadingAnimationFinished}>
+        <ModalComponent>
+          <SplashScreen loadingAnimationFinished={loadingAnimationFinished} setLoadingAnimationFinished={setLoadingAnimationFinished}/>
+          <main
+            ref={mainRef}
+            className="__scrollable__main__ w-[100vw] h-[100dvh] overflow-x-hidden overflow-y-auto"
+          >
+            {children}
+            
+          </main>
+        </ModalComponent>
+      </StartAccAnimationsContext.Provider>
     </MainRefContext.Provider>
   );
 }
@@ -30,3 +39,5 @@ export default function MainComponent({ children }: MainComponentProps) {
 export const useMainRef = () => {
   return useContext(MainRefContext);
 };
+
+export const useStartAccAnimation = () => useContext(StartAccAnimationsContext);

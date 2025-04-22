@@ -2,8 +2,6 @@
 import gsap from "gsap";
 import { Download, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
-import SocialIcons from "./SocialIconsWithWavyLines";
-import Link from "next/link";
 
 export default function HeroSection() {
   const timelineRef = useRef<GSAPTimeline | null>(null);

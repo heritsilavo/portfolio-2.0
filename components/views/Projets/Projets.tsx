@@ -5,6 +5,7 @@ import Projet3 from "./ProjetsItems/Projet3/Projet3";
 import Projet4 from "./ProjetsItems/Projet4/Projet4";
 import Projet5 from "./ProjetsItems/Projet5/Projet5";
 import Projet6 from "./ProjetsItems/Projet6/Projet6";
+import Projet7 from "./ProjetsItems/Projet7/Projet7";
 import ProjetsWrapper from "./ProjetsWrapper/ProjetsWrapper";
 
 export default function Projets() {
@@ -16,7 +17,7 @@ export default function Projets() {
       <Projet4 className="projet-item projet-item-4 bg-accent" />
       <Projet5 className="projet-item projet-item-5 bg-accent max-md:hidden" />
       <Projet6 className="projet-item projet-item-6 bg-accent max-md:hidden" />
-      <Projet2 className="projet-item projet-item-7 bg-accent max-lg:hidden" />
+      <Projet7 className="projet-item projet-item-7 bg-accent max-lg:hidden" />
     </ProjetsWrapper>
   );
 }

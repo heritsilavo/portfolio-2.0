@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@utility p7-container {
+    @apply flex flex-col p-[15px] space-y-2 text-white;
+
+    @variant lg {
+        @apply p-[10px] space-y-1
+    }
+
+    @variant 2xl {
+        @apply p-[20px] px-[30px] space-y-3;
+    }
+}
+
+@utility p7-img {
+    @apply relative w-[45px] h-[45px];
+
+    @variant lg {
+        @apply w-[37px] h-[37px];
+    }
+
+    @variant xl {
+        @apply w-[45px] h-[45px];
+    }
+
+    @variant 2xl {
+        @apply w-[50px] h-[50px];
+    }
+}

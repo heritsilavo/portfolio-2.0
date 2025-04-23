@@ -1,8 +1,8 @@
 "use client";
 import React, { createContext, useContext, useRef, useState } from "react";
 import "./MainComponent.css";
-import ModalComponent from "../ModalComponent/ModalComponent";
 import SplashScreen from "../views/SplashScreen/SplashScreen";
+import { ModalComponent } from "@heritsilavo/modal"
 
 type MainComponentProps = {
   children: React.ReactNode;
@@ -21,16 +21,16 @@ export default function MainComponent({ children }: MainComponentProps) {
   return (
     <MainRefContext.Provider value={mainRef}>
       <StartAccAnimationsContext.Provider value={loadingAnimationFinished}>
-        <ModalComponent>
-          <SplashScreen loadingAnimationFinished={loadingAnimationFinished} setLoadingAnimationFinished={setLoadingAnimationFinished}/>
-          <main
-            ref={mainRef}
-            className="__scrollable__main__ w-[100vw] h-[100dvh] overflow-x-hidden overflow-y-auto"
-          >
-            {children}
-            
-          </main>
-        </ModalComponent>
+          <ModalComponent>
+            <SplashScreen loadingAnimationFinished={loadingAnimationFinished} setLoadingAnimationFinished={setLoadingAnimationFinished} />
+            <main
+              ref={mainRef}
+              className="__scrollable__main__ w-[100vw] h-[100dvh] overflow-x-hidden overflow-y-auto"
+            >
+              {children}
+
+            </main>
+          </ModalComponent>
       </StartAccAnimationsContext.Provider>
     </MainRefContext.Provider>
   );

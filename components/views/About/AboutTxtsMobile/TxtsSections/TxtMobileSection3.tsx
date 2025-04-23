@@ -1,5 +1,5 @@
 "use client";
-import { useModal } from "@/components/ModalComponent/ModalComponent";
+import { useModal } from "@heritsilavo/modal";
 import { Livre } from "@/models/livre";
 import { getReadedBooks } from "@/utils/livres";
 import Image from "next/image";

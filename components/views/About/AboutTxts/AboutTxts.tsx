@@ -22,8 +22,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
   const initAnimations = useCallback(
     function () {
       if (!!mainScrollableRef?.current) {
-        console.log("HELLLLLLLLLLLLLOOOOOOOOOOOOOOOOOO");
-        
+    
         const getScrollAmmount = () => {
           return containerRef.current?.getBoundingClientRect().height;
         };
@@ -32,8 +31,7 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
           yPercent: -(100 - 100 / NB_SECTION),
           ease: "none",
         });
-
-
+ 
         ScrollTrigger.create({
           scroller: mainScrollableRef?.current,
           trigger: triggerRef.current,
@@ -41,9 +39,9 @@ export default function AboutTxts({ triggerRef }: AboutTxtsProps) {
           scrub: 1,
           start: "top top",
           end: `+=${getScrollAmmount()}`,
-          pin: true,
+          pin: triggerRef.current,
           anticipatePin: 3,
-          invalidateOnRefresh: true
+          invalidateOnRefresh: true,
         });
       }
 

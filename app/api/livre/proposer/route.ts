@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { defaultProposerLivre } from "@/models/proposer-livre";
-import { ProposerLivre } from "@prisma/client";
+import { defaultProposerLivre, ProposerLivre } from "@/models/proposer-livre";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {

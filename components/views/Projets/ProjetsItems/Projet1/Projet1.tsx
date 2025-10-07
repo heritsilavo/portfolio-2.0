@@ -7,8 +7,15 @@ type Projet1Props = {
 };
 
 export default function Projet1({ className }: Projet1Props) {
+  const images = [
+    "/garde-facile/1.png",
+    "/garde-facile/2.png",
+    "/garde-facile/3.png",
+    "/garde-facile/4.png",
+    "/garde-facile/5.png",
+  ]
   return (
-    <ProjectItemsWrapper href="https://github.com/" className={`p1-container ${className} `}>
+    <ProjectItemsWrapper images={images} openDesignsImages href="https://github.com/heritsilavo/garde-facile-front-react-native" className={`p1-container ${className} `}>
       <h2 className="p1-title">GARDEFACILE</h2>
       <h2 className="p1-description">
         Une application dédiée aux assistantes maternelles pour le suivi des

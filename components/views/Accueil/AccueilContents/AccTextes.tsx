@@ -2,12 +2,14 @@
 import gsap from "gsap";
 import { Download, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
-import SocialIcons from "./SocialIconsWithWavyLines";
-import Link from "next/link";
-import { useStartAccAnimation } from "@/components/MainComponent/MainComponent";
+import { useMainRef, useStartAccAnimation } from "@/components/MainComponent/MainComponent";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
   const timelineRef = useRef<GSAPTimeline | null>(null);
+  const heroContainerRef = useRef<HTMLDivElement>(null);
+  const scrollAnimationRef = useRef<GSAPAnimation | null>(null);
+  const mainRef = useMainRef();
 
   const startAnimation = useStartAccAnimation();
 
@@ -33,7 +35,9 @@ export default function HeroSection() {
       .reduce((acc: (JSX.Element | string)[], curr) => [...acc, curr, " "], []);
 
   useEffect(() => {
-    // Important: Set initial states immediately when component mounts
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial states
     gsap.set(".hero-animated", { opacity: 0 });
     gsap.set(".hero-button", {
       opacity: 0,
@@ -46,70 +50,107 @@ export default function HeroSection() {
         ease: "power3.out",
         duration: 0.8,
       },
-      // Delay to ensure initial states are applied
       delay: 0.1,
     });
 
     if (startAnimation) {
       timelineRef.current
-      .set(".hero-animated", { opacity: 1 })
-      .set([".hero-title", ".hero-subtitle"], {
-        y: () => getRandomOffset(30),
-        opacity: 0,
-      })
-      .set([".hero-slogan", ".hero-description"], {
-        opacity: 0,
-        y: 20,
-      })
-      // Text animations
-      .to(".hero-title", {
-        y: 0,
-        opacity: 1,
-        stagger: 0.15,
-        ease: "back.out(1.2)",
-      })
-      .to(
-        ".hero-subtitle",
-        {
+        .set(".hero-animated", { opacity: 1 })
+        .set([".hero-title", ".hero-subtitle"], {
+          y: () => getRandomOffset(30),
+          opacity: 0,
+        })
+        .set([".hero-slogan", ".hero-description"], {
+          opacity: 0,
+          y: 20,
+        })
+        .to(".hero-title", {
           y: 0,
           opacity: 1,
           stagger: 0.15,
           ease: "back.out(1.2)",
-        },
-        "<0.2"
-      )
-      // Content fade-ins
-      .to(
-        [".hero-slogan", ".hero-description"],
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.2,
-          ease: "power2.out",
-        },
-        "<0.3"
-      )
-      // Button animations
-      .to(
-        ".hero-button",
-        {
-          opacity: 1,
-          scale: 1,
-          stagger: 0.2,
-          ease: "elastic.out(1,0.3)",
-          duration: 1.2,
-        },
-        "<0.4"
-      );
+        })
+        .to(
+          ".hero-subtitle",
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            ease: "back.out(1.2)",
+          },
+          "<0.2"
+        )
+        .to(
+          [".hero-slogan", ".hero-description"],
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+          },
+          "<0.3"
+        )
+        .to(
+          ".hero-button",
+          {
+            opacity: 1,
+            scale: 1,
+            stagger: 0.2,
+            ease: "elastic.out(1,0.3)",
+            duration: 1.2,
+          },
+          "<0.4"
+        );
     }
 
+    if (!heroContainerRef.current || !mainRef?.current) return;
+
+    // MATCH MEDIA avec scope amélioré
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+      // Création de l'animation de scroll
+      scrollAnimationRef.current = gsap.to([".hero-title",
+        ".hero-subtitle",
+        ".hero-slogan",
+        ".hero-description",
+        ".hero-button"], {
+        y: -50,
+        opacity: 0,
+        stagger: 0.08,
+        ease: "power2.out",
+        transformOrigin: "top center",
+      });
+
+      // Création du ScrollTrigger
+      const trigger = ScrollTrigger.create({
+        trigger: heroContainerRef.current,
+        scroller: mainRef.current,
+        start: "top 20%",
+        end: "bottom 25%",
+        animation: scrollAnimationRef.current,
+        scrub: 1.5,
+        //toggleActions: "play none reverse reverse",
+        markers: false,
+      });
+
+      // Cleanup pour cette condition spécifique
+      return () => {
+        trigger?.kill();
+        scrollAnimationRef.current?.kill();
+      };
+    });
+
+    // Cleanup global
     return () => {
       timelineRef.current?.kill();
+      scrollAnimationRef.current?.kill();
+      mm.revert(); // Nettoyage de toutes les conditions matchMedia
     };
-  }, [startAnimation]);
+  }, [startAnimation, mainRef]);
 
   return (
-    <div className="hero-container">
+    <div ref={heroContainerRef} className="hero-container">
       <h1 className="hero-animated opacity-0 text-4xl xl:text-5xl 2xl:text-7xl font-semibold text-center lg:text-left">
         {splitText({
           text: "Bonjour, Je suis Heritsilavo",
@@ -136,8 +177,8 @@ export default function HeroSection() {
         ambitieux.
       </p>
 
-      <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 md:gap-6 mt-8 lg:mt-6 w-full sm:max-w-[80%] lg:max-w-[100%] mx-auto">
-        <button className="relative hero-button cursor-pointer opacity-0 lg:px-3 py-3 lg:py-2 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-accent text-background font-bold rounded-lg border-2 border-accent transition-all duration-300 text-sm md:text-base lg:text-sm 2xl:text-xl">
+      <div className="hero-animated flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 md:gap-6 mt-8 lg:mt-6 w-full sm:max-w-[80%] lg:max-w-[100%] mx-auto">
+        <button className="relative hero-button cursor-pointer opacity-0 lg:px-3 py-3 lg:py-2 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-accent text-background font-bold rounded-lg border-2 border-accent text-sm md:text-base lg:text-sm 2xl:text-xl">
           <a
             href="/cv/Heritsilavo_CV.pdf"
             download
@@ -148,7 +189,7 @@ export default function HeroSection() {
           </a>
         </button>
 
-        <button className="hero-button cursor-pointer opacity-0 flex items-center justify-center gap-2 lg:px-3 py-3 lg:py-2 2xl:px-4 2xl:py-3 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-transparent text-accent font-bold rounded-lg border-2 border-accent transition-all duration-300 text-sm md:text-base lg:text-sm 2xl:text-xl">
+        <button className="hero-button cursor-pointer opacity-0 flex items-center justify-center gap-2 lg:px-3 py-3 lg:py-2 2xl:px-4 2xl:py-3 w-full sm:w-1/2 md:w-[40%] lg:w-auto bg-transparent text-accent font-bold rounded-lg border-2 border-accent text-sm md:text-base lg:text-sm 2xl:text-xl">
           <a
             href="mailto:heritsilavo4835@gmail.com"
             className="m-0 h-full w-full flex items-center justify-center gap-2"
